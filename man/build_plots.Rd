@@ -4,15 +4,14 @@
 \alias{build_plots}
 \title{Function to builds plots (called by the shell script)}
 \usage{
-build_plots(date = NULL, repo = getwd())
+build_plots(date = NULL, repo = getwd(), tofile = FALSE)
 }
 \arguments{
 \item{date}{(optional) character vector of dates, can either be of length 1, 2, or left unspecified. If length(date)==1, then the plots will include all commits from that day until the latest commit. If length(date)==2, then date will be treated as a range, and the plot will include all commits within that range. If date is left unspecified, then the plot will include all commits in the repository.}
 
 \item{repo}{(optional) character string giving the relative or absolute path to the git repository. If left unspecified, the current working directory will be used as the repo.}
-}
-\value{
-Nothing returned - plots are saved to the directory specified in repo as 'wordplot.pdf'
+
+\item{tofile}{(optional) logical specifying whether the plot should be written to a pdf file (instead of displayed interactively)}
 }
 \description{
 Function to builds plots (called by the shell script)
