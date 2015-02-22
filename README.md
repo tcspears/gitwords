@@ -8,5 +8,7 @@ Tools for tracking word counts of commits made to git repositories
 * The RScript package in R, if you would like to use the shell scripts.
 
 ## Installation
-To install, run the following at :
-	install_github('gitwords','tcspears')
+To install, run the following in R:
+```
+install_github('gitwords','tcspears')
+```
