@@ -13,25 +13,25 @@ gitwords includes three main functions that can help you keep track of your writ
 
 gitwords is written in R to take advantage of R’s plotting functionality (and in particular, within the ggplot2 package), but you can also access it from the command line / shell / Terminal, in the same way as you would access git itself. 
 
-### How just how does this thing work?
+### Just how does this thing work?
 
-git includes a convenient tool called diff, which allows you to create a document that shows the words that were added and deleted between two commits. For instance, suppose that yesterday, you wrote:
+git includes a convenient tool called diff, which one to create a document that shows the words that were added and deleted between two commits. For instance, suppose that yesterday you wrote a document consisting of the following sentence:
 
 ```
 The quick brown fox jumped over the lazy dog.
 ```
-and committed it to a git repository. Today, you change the above text to:
+and committed it to a git repository. Today, you change the document to:
 ```
 The slow red fox jumped over the lazy cat.
 ``` 
-Running git-diff will produce a text document that looks like this:
+Running git-diff on these two commits will produce a text document that looks like this:
 ```
 ~ The
-\- quick brown
-\+ slow red
+- quick brown
++ slow red
 ~ fox jumped over the lazy
-\- dog
-\+ cat 
+- dog
++ cat 
 ```
 
 ## Usage
