@@ -3,19 +3,19 @@ suppressMessages(library(methods))
 suppressMessages(require("gitwords"))
 args <- commandArgs(TRUE)
 if(length(args)==3){
-  build_plots(date=c(as.character(args[1]),as.character(args[2])),repo=as.character(args[3]),tofile=TRUE)
+  plot_words(date=c(as.character(args[1]),as.character(args[2])),repo=as.character(args[3]),tofile=TRUE)
 } else if(length(args)==2){
   if(grepl("/",as.character(args[2]))==TRUE){
-    build_plots(date=as.character(args[1]),repo=as.character(args[2]),tofile=TRUE)
+    plot_words(date=as.character(args[1]),repo=as.character(args[2]),tofile=TRUE)
   } else {
-    build_plots(date=c(as.character(args[1]),as.character(args[2])),tofile=TRUE)
+    plot_words(date=c(as.character(args[1]),as.character(args[2])),tofile=TRUE)
   }
 } else if(length(args)==1) {
   if(grepl("/",as.character(args[1]))==TRUE){
-    build_plots(repo=as.character(args[1]),tofile=TRUE)
+    plot_words(repo=as.character(args[1]),tofile=TRUE)
   } else {
-    build_plots(date=as.character(args[1]),tofile=TRUE)
+    plot_words(date=as.character(args[1]),tofile=TRUE)
   }
 } else {
-  build_plots(tofile=TRUE)
+  plot_words(tofile=TRUE)
 }
