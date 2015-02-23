@@ -13,6 +13,7 @@
 
 plot_words <- function(date=NULL,repo=getwd(),metric="net",tofile=FALSE){
   a <- extract_commits(repo)
+  a <- drop_interday(a)
   b <- NULL
   if(is.null(date)){
     b <- a

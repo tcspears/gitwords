@@ -12,6 +12,7 @@
 
 word_stats <- function(date=NULL,repo=getwd()){
   a <- extract_commits(repo)
+  a <- drop_interday(a)
   b <- NULL
   if(is.null(date)){
     b <- a

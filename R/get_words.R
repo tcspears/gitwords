@@ -12,6 +12,7 @@
 
 get_words <- function(date=Sys.Date(),repo=getwd()){
   a <- extract_commits(repo)
+  a <- drop_interday(a)
   b <- subset_commits_date(a,date)
   
   # Note: the ugly looking subsetting procedure to form 'c' takes the rownames of b, sorts them in decreasing order, extracts the first 
