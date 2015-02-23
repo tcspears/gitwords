@@ -1,5 +1,5 @@
 ---
-title: "Examples of gitwords"
+title: "Demonstration of gitwords"
 author: "Taylor Spears"
 date: "23 February 2015"
 output: html_document
@@ -7,16 +7,54 @@ output: html_document
 
 ```{r}
 require("gitwords")
+```
+
+The three functions can be called with a single date or a range of dates as inputs. When get_words is called with a single date, it reports the word counts for that particular date. When word_stats and plot_words are called with a single date, they calculate summary statistics and build plots using all commits since that date:
+
+```{r1}
 get_words(date="2013-12-01",
           repo="~/Dropbox/Repositories/Thesis")
-get_words(date=c("2013-12-01","2013-12-07"),
-          repo="~/Dropbox/Repositories/Thesis")
-word_stats(repo="~/Dropbox/Repositories/Thesis")
-word_stats(date=c("2013-07-01","2014-02-17"),
+word_stats(date="2013-07-01",
            repo="~/Dropbox/Repositories/Thesis")
-plot_words(date=c("2013-07-01","2014-02-17"))
-plot_words(date=c("2013-07-01","2014-02-17"),
-           metric="new",
+plot_words(date="2013-07-01",
            repo="~/Dropbox/Repositories/Thesis")
 ```
 
+plot_words allows you to choose which word count (i.e. new words, deleted words, net additions) to plot. By default, net additions are plotted, but this can be changed with the metric parameter:
+
+```{r15}
+plot_words(date="2013-07-01",
+           metric="new",
+           repo="~/Dropbox/Repositories/Thesis")
+```
+  
+You can also supply a range of dates to the functions, in which case all commits between those two dates are used:
+  
+```{r2}
+get_words(date=c("2013-12-01","2013-12-07"),
+          repo="~/Dropbox/Repositories/Thesis")
+word_stats(date=c("2013-07-01","2013-12-07"),
+          repo="~/Dropbox/Repositories/Thesis")
+plot_words(date=c("2013-07-01","2013-12-07"),
+          repo="~/Dropbox/Repositories/Thesis")
+```
+          
+Finally, you can omit providing the date altogether. Omitting the date parameter has different effects for the three functions. get_words will report word counts for today's date if no date is supplied.
+```{r3,error=TRUE}
+get_words(repo="~/Dropbox/Repositories/Thesis")
+```
+which throws an error, since I have no commited any writing to my thesis repository today.
+
+By comparison, word_stats and plot_words will use all commits in the repository if no date parameter is supplied:
+
+```{r4}
+word_stats(repo="~/Dropbox/Repositories/Thesis")
+plot_words(repo="~/Dropbox/Repositories/Thesis")
+```
+
+Finally, if you omit the repo parameter, then the functions will use your current working directory as the git repository. For example,
+
+```{r5}
+setwd("~/Dropbox/Repositories/Thesis")
+get_words(date="2013-12-01")
+```
