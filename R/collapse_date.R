@@ -2,7 +2,7 @@
 #' 
 #' Takes a table of word counts (produced by extract_commits and then modified by add_word_counts_table) and collapses the word counts by date.
 #' 
-#' @param commit.table Data.frame of commits, produced by extract_commits.
+#' @param commit.table Data.frame of commits (e.g. produced by drop_interday).
 #' @param range Numeric vector of two elements that specifies the upper/lower bounds of word counts. Anything outside this range is considered an outlier and is dropped.
 #' @return A data.frame containing dates and the corresponding counts for new words, deleted words, and net additions.
 #' @examples 
@@ -34,8 +34,10 @@ collapse_date <- function(commit.table,range=c(-4000,10000)){
   
   words.table <- words.table[words.table[,4] > range[1] & words.table[,4] < range[2],]
   
-  # Deletes the top entry, since it will just have NA values.
-  words.table <- words.table[-1,]
+  # Deletes the top entry, if it has any NA values.
+  if(is.na(words.table[1,2]) | is.na(words.table[1,3]) | is.na(words.table[1,4])){
+    words.table <- words.table[-1,]
+  }
   
   # Returns the modified table.
   return(words.table)
