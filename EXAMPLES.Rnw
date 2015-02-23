@@ -1,0 +1,21 @@
+\documentclass{article}
+
+\begin{document}
+
+<<data,echo=TRUE>>=
+require("gitwords")
+get_words(date="2013-12-01",
+          repo="~/Dropbox/Repositories/Thesis")
+get_words(date=c("2013-12-01","2013-12-07"),
+          repo="~/Dropbox/Repositories/Thesis")
+word_stats(repo)
+word_stats(date=c("2013-07-01","2014-02-17"),
+           repo="~/Dropbox/Repositories/Thesis")
+plot_words(date=c("2013-07-01","2014-02-17"))
+plot_words(date=c("2013-07-01","2014-02-17"),
+           metric="new",
+           repo="~/Dropbox/Repositories/Thesis")
+@
+
+
+\end{document}
