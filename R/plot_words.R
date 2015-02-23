@@ -1,31 +1,43 @@
-#' Builds plots of net additions
+#' Function to builds plots (called by the shell script)
 #' 
-#' @param Data.frame of word counts for each date (produced by collapse_date)
-#' @param cols Numeric indicating the number of columns in the resulting plot
-#' @return A multiplot containing (a) net additions as a function of time, and (b) a density histogram of net additions. 
+#' @param date (optional) character vector of dates, can either be of length 1, 2, or left unspecified. If length(date)==1, then the plots will include all commits from that day until the latest commit. If length(date)==2, then date will be treated as a range, and the plot will include all commits within that range. If date is left unspecified, then the plot will include all commits in the repository.
+#' @param repo (optional) character string giving the relative or absolute path to the git repository. If left unspecified, the current working directory will be used as the repo.
+#' @param metric (optional) Character string indicating which word count measure should be plotted. Acceptable options are "net", "new", or "deleted".
+#' @param tofile (optional) logical specifying whether the plot should be written to a pdf file (instead of displayed interactively)
 #' @examples
-#' a <- extract_commits(repo="~/repositories/project/")
-#' a <- add_word_counts_table(a,repo="~/repositories/project/")
-#' b <- collapse_date(a)
-#' plot_words(b)
+#' plot_words()
+#' plot_words(date="2015-01-01")
+#' plot_words(date="2015-01-01",repo="~/repositories/project/")
+#' plot_words(date=c("2015-01-01","2015-02-20"))
+#' plot_words(date=c("2015-01-01","2015-02-20"),repo="~/repositories/project/")
 
-plot_words <- function(words.table,cols=1){
-  
-  # This addresses a very stupid bug in ggplot2: that it cannot make reference
-  # to local vars (i.e. words.table).
-  .e <- environment()
-  
-  # Loads ggplot2 for making plots.
-  library(ggplot2)
-  
-  # Builds the plots.
-  p1 <- ggplot(data=words.table, aes(x=words.table[,1], y=words.table[,4]),environment=.e) + geom_point() + geom_smooth() + labs(title="Net additions per day, excluding outliers",x="Date",y="Word count")
-  p2 <- qplot(words.table[,4],geom="blank",main="Net additions per day, excluding outliers",xlab="Word count",environment=.e) +
-    geom_line(aes(y = ..density..,colour = "Observed"), stat="density") +
-    geom_histogram(aes(y = ..density..), alpha=0.4) +
-    scale_colour_manual(name = 'Density', values = c('red', 'blue')) +
-    theme(legend.position="none")
-  
-  # Plots the plots using multiplot.
-  multiplot(p1,p2,cols=cols)
+plot_words <- function(date=NULL,repo=getwd(),metric="net",tofile=FALSE){
+  a <- extract_commits(repo)
+  b <- NULL
+  if(is.null(date)){
+    b <- a
+  } else if(length(date)==1){
+    upper.date <- as.character(as.Date(a[order(as.Date(a$Date),decreasing=TRUE),][1,2]))
+    lower.date <- date
+    b <- subset_commits_date(commit.table=a,date=c(lower.date,upper.date))
+  } else {
+    b <- subset_commits_date(commit.table=a,date=date)
+  }
+  c <- add_word_counts_table(b,repo)
+  d <- collapse_date(c)
+  if(tofile==FALSE){
+    build_plots(d,metric=metric)
+  } else {
+    if(substr(repo,nchar(repo),nchar(repo))=="/"){
+      pdf(file=paste(repo,"wordplot.pdf",sep=""))
+      build_plots(d,metric=metric)
+      dev.off()
+      cat("Plot saved as wordplot.pdf within ",repo,"\n")
+    } else {
+      pdf(file=paste(repo,"/wordplot.pdf",sep=""))
+      build_plots(d,metric=metric)
+      dev.off()
+      cat("Plot saved as wordplot.pdf within ",repo,"\n")
+    }
+  }
 }
