@@ -2,17 +2,19 @@
 Tools for tracking word counts of commits made to git repositories
 
 ## Description
-gitwords provides a series of functions for counting, summarising, and plotting the number of words committed to a git repository over time. It is intended to be used by writers who use git as a version control system for their work. As a PhD student, I used git as a version control system for my thesis, but I was disappointed by the lack of available tools within git for tracking my writing progress. Indeed, git was designed for software developers rather than writers. While git includes some functionality to track the number of lines of code committed to a repository, ‘lines of code’ is a fairly useless measure of productivity for writers.
+gitwords provides a series of functions for counting, summarising, and plotting the number of words committed to a git repository over time. It is intended to be used by writers — PhD students, academics, etc. — who use git as a version control system for their writing projects. 
 
-gitwords includes three principle functions:
-* `get_words()`: calculates word counts of commmits made to a git repository for a date or a range of dates.
+As a PhD student, I found git to be an indispensable tool for keeping track of various versions of my thesis chapters. But I was disappointed by the lack of available tools within git for tracking my writing progress on a day-to-day basis. Indeed, git was designed for software developers rather than writers. While git includes some functionality to track the number of lines of code committed to a repository, ‘lines of code’ is a fairly useless measure of productivity for writers. 
+
+gitwords includes three principle R functions:
+* `get_words()`: calculates word counts of commits made to a git repository for a date or a range of dates.
 * `word_stats()`: calculates summary statistics (mean, median, standard deviation, minimum, maximum) of the daily word counts made to a git repository for a range of dates.
 * `plot_words()`: Builds a series of plots (histogram, line graph with regression line) of daily word counts committed to a git repository.
 
-gitwords is written in R to take advantage of R’s plotting functionality, but you can access it from the command line / shell / Terminal, in th
+gitwords is written in R to take advantage of R’s plotting functionality (and in particular, within the ggplot2 package), but you can also access it from the command line / shell / Terminal, in the same way as you would access git itself.
 
-
-
+## Examples
+I put together a knitr document that provides a demonstration of these functions within R. You can find a PDF of that [here](https://github.com/tcspears/gitwords/blob/master/EXAMPLES.pdf). 
 
 ## Requirements
 * git
