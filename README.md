@@ -15,24 +15,30 @@ gitwords is written in R to take advantage of R’s plotting functionality (and 
 
 ### Just how does this thing work?
 
-git includes a convenient tool called diff, which one to create a document that shows the words that were added and deleted between two commits. For instance, suppose that yesterday you wrote a document consisting of the following sentence:
+git includes a convenient tool called diff, which allows one to create a document that shows the words that were added and deleted between two commits. For instance, suppose that yesterday you wrote a document consisting of the following sentence:
 
 ```
 The quick brown fox jumped over the lazy dog.
 ```
-and committed it to a git repository. Today, you change the document to:
+and committed this document to a git repository. Today, you change the document to read:
 ```
 The slow red fox jumped over the lazy cat.
 ``` 
 Running git-diff on these two commits will produce a text document that looks like this:
 ```
-~ The
+The
 - quick brown
 + slow red
-~ fox jumped over the lazy
-- dog
-+ cat 
+fox jumped over the lazy
+- dog.
++ cat. 
 ```
+The idea behind gitwords is that we can calculate the number of new words and deleted words in a document between any two commits by counting up the number of words on the lines beginning with ‘+’ and ‘-‘, respectively. For instance, in the above case, the number of new words would be 3, and the number of deleted words would also be 3.
+
+The ‘net additions’ between two commits will then be the difference between the number of new words and deleted words. In the above case, net additions will be equal to zero.
+
+What gitwords does is sums up these three word counts for all of the commits made on each day in the git repository in order to calculate daily word counts.
+
 
 ## Usage
 
@@ -60,10 +66,6 @@ becomes:
 ```
 $ get_words “2015-01-01” “2015-02-02” “~/Dropbox/Repositories/Thesis”
 ```
-
-### How this fits into my workflow:
-
-
 
 ## Requirements
 * git. See [here](http://git-scm.com/book/en/v2/Getting-Started-Installing-Git) for more information.
