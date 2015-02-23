@@ -2,6 +2,17 @@
 Tools for tracking word counts of commits made to git repositories
 
 ## Description
+gitwords provides a series of functions for counting, summarising, and plotting the number of words committed to a git repository over time. It is intended to be used by writers who use git as a version control system for their work. As a PhD student, I used git as a version control system for my thesis, but I was disappointed by the lack of available tools within git for tracking my writing progress. Indeed, git was designed for software developers rather than writers. While git includes some functionality to track the number of lines of code committed to a repository, ‘lines of code’ is a fairly useless measure of productivity for writers.
+
+gitwords includes three principle functions:
+* `get_words()`: calculates word counts of commmits made to a git repository for a date or a range of dates.
+* `word_stats()`: calculates summary statistics (mean, median, standard deviation, minimum, maximum) of the daily word counts made to a git repository for a range of dates.
+* `plot_words()`: Builds a series of plots (histogram, line graph with regression line) of daily word counts committed to a git repository.
+
+gitwords is written in R to take advantage of R’s plotting functionality, but you can access it from the command line / shell / Terminal, in th
+
+
+
 
 ## Requirements
 * git
@@ -12,7 +23,7 @@ Tools for tracking word counts of commits made to git repositories
 ## Installing gitwords
 The easiest way to install gitwords is to use the `install_github()` function in the devtools package to install it directly from this github.
 
-If you do not have devtools installed already, then run:
+If you do not have devtools installed already, then open up an R session and run:
 ```
 > install.packages("devtools")
 ```
