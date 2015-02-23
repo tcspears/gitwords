@@ -1,6 +1,8 @@
 # gitwords
 Tools for tracking word counts of commits made to git repositories
 
+## Description
+
 ## Requirements
 * git
 * R (preferably version 3.1.2 or higher). Within R, you will also need to install the following packages (all of which are available on CRAN):
@@ -12,19 +14,19 @@ The easiest way to install gitwords is to use the `install_github()` function in
 
 If you do not have devtools installed already, then run:
 ```
-install.packages("devtools")
+> install.packages("devtools")
 ```
 Once devotees has been installed, load it into R:
 ```
-library("devtools")
+> library("devtools")
 ```
 Finally, to install the gitwords package, run the following in R:
 ```
-install_github('gitwords','tcspears')
+> install_github('gitwords','tcspears')
 ```
 You should then be able to load it into memory using:
 ```
-library("gitwords")
+> library("gitwords")
 ```
 
 ### Installation of the shell scripts
@@ -48,17 +50,19 @@ then you can move on to the next step.
 
 Next, copy the three files to ’/usr/local/bin’ so that you don’t have to specify the full path to these files each time you want to use them. Alternatively, any directory listed in your terminal’s $PATH will be fine. On unix based systems, this can be achieved by running:
 ```
-sudo cp git-words /usr/local/bin/git-words
-sudo cp git-words-stats /usr/local/bin/git-words-stats
-sudo cp git-words-plot /usr/local/bin/git-words-plot
+$ sudo cp git-words /usr/local/bin/git-words
+$ sudo cp git-words-stats /usr/local/bin/git-words-stats
+$ sudo cp git-words-plot /usr/local/bin/git-words-plot
 ```
-Unless you are running as root, you will need to supply the password to your user account to authorise these commands.
+Unless you are running as root, you will need to supply the password to your user account to authorise these commands. But unless the commands have trouble executing, then the terminal will not return any output.
 
 Next, you will need to make these files executable. Open up the terminal (in Mac OS X and Linux), and type in the following
 ```
-chmod +x /usr/local/bin/count-words
-chmod +x /usr/local/bin/count-words-stats
-chmod +x /usr/local/bin/count-words-plot
+$ chmod +x /usr/local/bin/count-words
+$ chmod +x /usr/local/bin/count-words-stats
+$ chmod +x /usr/local/bin/count-words-plot
 ```
+Again, if all works appropriately, then the terminal will not return any output.
 
-Finally, if you chose 
+## Directions for use
+
