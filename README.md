@@ -27,11 +27,11 @@ The slow red fox jumped over the lazy cat.
 Running git-diff will produce a text document that looks like this:
 ```
 ~ The
-  - quick brown
-  + slow red
+\- quick brown
+\+ slow red
 ~ fox jumped over the lazy
-  - dog
-  + cat 
+\- dog
+\+ cat 
 ```
 
 ## Usage
