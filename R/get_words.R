@@ -17,10 +17,10 @@ get_words <- function(date=Sys.Date(),repo=getwd()){
   
   # Note: the ugly looking subsetting procedure to form 'c' takes the rownames of b, sorts them in decreasing order, extracts the first 
   # element, and then adds 1 onto it. (We need to do this in order to get the last commit on 'a' before the beginning
-  # of the date interval in order to calculate word counts. After it extracts this, it forms a sequence of
-  # rownames of b from the 1st to the last + 1, and then subsets 'a' with this sequence.
-  
-  c <- a[seq(as.numeric(rownames(b)[1]),as.numeric(rownames(b))[order(as.numeric(rownames(b)),decreasing=TRUE)][1]+1),]
+  # of the date interval in order to calculate word counts. After it extracts this, it binds the element of a corresponding to 
+  # this row number to the matrix b.
+    
+  c <- rbind(b,a[rownames(a)==head(as.numeric(rownames(b))[order(as.numeric(rownames(b)),decreasing=TRUE)],n=1)+1,])
   d <- add_word_counts_table(c,repo)
   e <- collapse_date(d)
   rownames(e) <- NULL
