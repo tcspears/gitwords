@@ -7,7 +7,7 @@
 collapse_date(commit.table, range = c(-4000, 10000))
 }
 \arguments{
-\item{commit.table}{Data.frame of commits, produced by extract_commits.}
+\item{commit.table}{Data.frame of commits (e.g. produced by drop_interday).}
 
 \item{range}{Numeric vector of two elements that specifies the upper/lower bounds of word counts. Anything outside this range is considered an outlier and is dropped.}
 }
