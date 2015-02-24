@@ -4,12 +4,14 @@
 \alias{get_words}
 \title{Get word counts for a date or a range of dates (called by the shell script)}
 \usage{
-get_words(date = Sys.Date(), repo = getwd())
+get_words(date = Sys.Date(), repo = getwd(), netOnly = TRUE)
 }
 \arguments{
 \item{date}{(optional) character vector of dates, can either be of length 1, 2, or left unspecified. If length(date)==1, then get_words returns the word counts for that particular day. If length(date)==2, then date will be treated as a range, and get_words will return all word counts for dates within that range. If date is left unspecified, then get_words will return the word counts for the current date.}
 
 \item{repo}{(optional) character string giving the relative or absolute path to the git repository. If left unspecified, the current working directory will be used as the repo.}
+
+\item{netOnly}{(optional) logical to specify whether only net additions/modifications should be reported. Set to TRUE by default}
 }
 \value{
 Data.frame of word counts for one date or a range of dates.

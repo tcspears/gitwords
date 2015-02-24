@@ -4,17 +4,15 @@
 \alias{build_plots}
 \title{Builds plots of net additions}
 \usage{
-build_plots(words.table, metric = "net", cols = 1)
+build_plots(words.table, metric = "net")
 }
 \arguments{
-\item{metric}{(optional) Character string indicating which word count measure should be plotted. Acceptable options are "net", "new", or "deleted".}
-
-\item{cols}{(optional) Numeric indicating the number of columns in the resulting plot}
+\item{metric}{(optional) Character string indicating which word count measure should be plotted. Acceptable options are "net" (net additions and modifications) and "nd" (new and deleted)}
 
 \item{Data.frame}{of word counts for each date (produced by collapse_date)}
 }
 \value{
-A multiplot containing (a) net additions as a function of time, and (b) a density histogram of net additions.
+A multiplot containing line graphs and density histograms of the chosen metric..
 }
 \description{
 Builds plots of net additions

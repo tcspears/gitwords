@@ -4,12 +4,14 @@
 \alias{word_stats}
 \title{Function to compute summary statistics (called by the shell script)}
 \usage{
-word_stats(date = NULL, repo = getwd())
+word_stats(date = NULL, repo = getwd(), netOnly = TRUE)
 }
 \arguments{
 \item{date}{(optional) character vector of dates, can either be of length 1, 2, or left unspecified. If length(date)==1, then the summary statistics will include all commits from that day until the latest commit. If length(date)==2, then date will be treated as a range, and the summary statistics will include all commits within that range. If date is left unspecified, then the summary statistics will include all commits in the repository.}
 
 \item{repo}{(optional) repo (optional) character string giving the relative or absolute path to the git repository. If left unspecified, the current working directory will be used as the repo.}
+
+\item{netOnly}{(optional) logical to specify whether only net additions/modifications should be reported. Set to TRUE by default}
 }
 \value{
 Matrix of summary statistics for word counts

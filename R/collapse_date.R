@@ -15,14 +15,15 @@ collapse_date <- function(commit.table,range=c(-4000,10000)){
   new.words <- tapply(commit.table[,3],as.Date(commit.table$Date),sum)
   del.words <- tapply(commit.table[,4],as.Date(commit.table$Date),sum)
   net.words <- tapply(commit.table[,5],as.Date(commit.table$Date),sum)
+  net.mods <- tapply(commit.table[,6],as.Date(commit.table$Date),sum)
   
   # Binds the resulting tapply'd columns into a new matrix. Also binds the
   # rownames (dates) into the matrix so these can be used later. Finally,
   # converts the matrix into a data.frame (the more natural object for use
   # with ggplot2 and outputing to csv formats.)
-  words.matrix <- cbind(new.words,del.words,net.words)
+  words.matrix <- cbind(new.words,del.words,net.words,net.mods)
   words.matrix <- cbind(rownames(words.matrix),words.matrix)
-  colnames(words.matrix) <- c("Date","New Words","Deleted Words","Net Additions")
+  colnames(words.matrix) <- c("Date","New Words","Deleted Words","Net Additions","Net Modifications")
   words.table <- as.data.frame(words.matrix)
   
   # Formats the columns of the new data.frame into data and numeric formats.
@@ -31,7 +32,9 @@ collapse_date <- function(commit.table,range=c(-4000,10000)){
   words.table[,2] <- as.numeric(as.character(words.table[,2]))
   words.table[,3] <- as.numeric(as.character(words.table[,3]))
   words.table[,4] <- as.numeric(as.character(words.table[,4]))
+  words.table[,5] <- as.numeric(as.character(words.table[,5]))
   
+  # Subsets the table to remove outliers (defined as excessively large numbers of net additions)
   words.table <- words.table[words.table[,4] > range[1] & words.table[,4] < range[2],]
   
   # Deletes the top entry, which has NA values.

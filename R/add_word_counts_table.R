@@ -19,9 +19,10 @@ add_word_counts_table <- function(commit.table,repo){
     commit.table[i,3] <- counts[[1]]
     commit.table[i,4] <- counts[[2]]
     commit.table[i,5] <- commit.table[i,3] - commit.table[i,4]
+    commit.table[i,6] <- commit.table[i,3] + commit.table[i,4]
   }
   # Adds names to the new columns (to make them prettier).
-  colnames(commit.table)[3:5] <- c("New Words","Deleted Words","Net Additions")
+  colnames(commit.table)[3:6] <- c("New Words","Deleted Words","Net Additions","Net Modifications")
   
   # Returns the modified table.
   return(commit.table)

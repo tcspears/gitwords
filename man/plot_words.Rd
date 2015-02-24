@@ -11,7 +11,7 @@ plot_words(date = NULL, repo = getwd(), metric = "net", tofile = FALSE)
 
 \item{repo}{(optional) character string giving the relative or absolute path to the git repository. If left unspecified, the current working directory will be used as the repo.}
 
-\item{metric}{(optional) Character string indicating which word count measure should be plotted. Acceptable options are "net", "new", or "deleted".}
+\item{metric}{(optional) Character string indicating which word count measure should be plotted. Acceptable options are "net" (net additions and modifications) and "nd" (new and deleted)}
 
 \item{tofile}{(optional) logical specifying whether the plot should be written to a pdf file (instead of displayed interactively)}
 }

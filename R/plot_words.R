@@ -2,7 +2,7 @@
 #' 
 #' @param date (optional) character vector of dates, can either be of length 1, 2, or left unspecified. If length(date)==1, then the plots will include all commits from that day until the latest commit. If length(date)==2, then date will be treated as a range, and the plot will include all commits within that range. If date is left unspecified, then the plot will include all commits in the repository.
 #' @param repo (optional) character string giving the relative or absolute path to the git repository. If left unspecified, the current working directory will be used as the repo.
-#' @param metric (optional) Character string indicating which word count measure should be plotted. Acceptable options are "net", "new", or "deleted".
+#' @param metric (optional) Character string indicating which word count measure should be plotted. Acceptable options are "net" (net additions and modifications) and "nd" (new and deleted)
 #' @param tofile (optional) logical specifying whether the plot should be written to a pdf file (instead of displayed interactively)
 #' @examples
 #' plot_words()

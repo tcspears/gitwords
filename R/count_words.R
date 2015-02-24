@@ -14,7 +14,7 @@ count_words <- function(commit_old,commit_new,repo){
   
   # This runs git diff in porcelain mode, and then saves the output as a
   # character vector 'a'.
-  a <- system(paste("/usr/bin/git diff ",commit_old,"..",commit_new," --word-diff=porcelain",sep=""),intern=TRUE)
+  a <- system(paste(git.location," ",commit_old,"..",commit_new," --word-diff=porcelain",sep=""),intern=TRUE)
   
   # Next we loop through each element of a. If the element begins with "+",
   # then we count the number of words in that line and that number to new_words.
@@ -24,12 +24,7 @@ count_words <- function(commit_old,commit_new,repo){
   del_words <- 0
   for(i in seq(1,length(a))){
     if(substr(a[i],1,1)=="+"){
-      # Words are defined using the regular expression '\\W+'. The sapply below does the
-      # actual counting. Note: this is different from the technique used in
-      # the previous python script which involved splitting the string into
-      # a set of substrings and then counting the resulting number of strings.
-      # Stackexchange says this is more efficient, but it counts words in a funny
-      # way, i.e. periods and question marks are counted as words.
+      # Words are defined using the regular expression '\\W+'. 
       new_words <- new_words + sapply(gregexpr("\\W+", substr(a[i],2,nchar(a[i],allowNA=TRUE))), length)
     } else if(substr(a[i],1,1)=="-"){
       del_words <- del_words + sapply(gregexpr("\\W+", substr(a[i],2,nchar(a[i],allowNA=TRUE))), length)
