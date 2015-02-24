@@ -35,16 +35,15 @@ fox jumped over the lazy
 ```
 The idea behind gitwords is that we can calculate the number of new words and deleted words in a document between any two commits by counting up the number of words on the lines beginning with ‘+’ and ‘-‘, respectively. For instance, in the above case, the number of new words would be 3, and the number of deleted words would also be 3. What gitwords does is sums up these three word counts for all of the commits made on each day in the git repository in order to calculate daily word counts.
 
-gitwords is focussed on measuring two productivity metrics that should matter to writers. The first is ‘net additions’, which is defined as the difference between the number of new words and deleted words on a particular day:
+gitwords is focussed on measuring two productivity metrics that are relevant to writers. The first is ‘net additions’, which roughly captures how much your writing project ‘grew’ in a particular day. It is defined as the difference between the number of new words and deleted words on a particular day:
 
-\\ net additions = new words - deleted words \\
+net additions = new words - deleted words
 
+In the above example, net additions will be equal to zero (3 words added, 3 words deleted.) Of course, a significant component of productive writing involves editing, so gitwords also measures ‘net modifications’, which is defined as the sum of new words and deleted words in a particular day:
 
+net modifications = new words + deleted words
 
-
-In the above case, net additions will be equal to zero.
-
-
+gitwords provides a number of functions for summarising and plotting these metrics by date, day of the week, etc. See the RMarkDown document (described below) to see it in action.
 
 ## Usage
 
