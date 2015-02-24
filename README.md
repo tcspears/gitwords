@@ -33,11 +33,17 @@ fox jumped over the lazy
 - dog.
 + cat. 
 ```
-The idea behind gitwords is that we can calculate the number of new words and deleted words in a document between any two commits by counting up the number of words on the lines beginning with ‘+’ and ‘-‘, respectively. For instance, in the above case, the number of new words would be 3, and the number of deleted words would also be 3.
+The idea behind gitwords is that we can calculate the number of new words and deleted words in a document between any two commits by counting up the number of words on the lines beginning with ‘+’ and ‘-‘, respectively. For instance, in the above case, the number of new words would be 3, and the number of deleted words would also be 3. What gitwords does is sums up these three word counts for all of the commits made on each day in the git repository in order to calculate daily word counts.
 
-The ‘net additions’ between two commits will then be the difference between the number of new words and deleted words. In the above case, net additions will be equal to zero.
+gitwords is focussed on measuring two productivity metrics that should matter to writers. The first is ‘net additions’, which is defined as the difference between the number of new words and deleted words on a particular day:
 
-What gitwords does is sums up these three word counts for all of the commits made on each day in the git repository in order to calculate daily word counts.
+\\ net additions = new words - deleted words \\
+
+
+
+
+In the above case, net additions will be equal to zero.
+
 
 
 ## Usage
