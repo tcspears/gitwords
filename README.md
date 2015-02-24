@@ -73,37 +73,65 @@ $ get_words “2015-01-01” “2015-02-02” “~/Dropbox/Repositories/Thesis�
 ```
 
 ## Requirements
-* git. See [here](http://git-scm.com/book/en/v2/Getting-Started-Installing-Git) for more information.
+* git. See [here](http://git-scm.com/downloads) for more information.
 * A working R installation. See [here](http://www.r-project.org/). 
-* Within R, you will also need to install the following packages (all of which are available on CRAN via the `install.packages()` function within R):
-  * ggplot2 for producing pretty plots
-  * devtools (optional), to install the package from this github repository.
+* Within R, you will also need to install the ‘ggplot2’ package, which can be obtained by running `install.packages(“ggplot2”)’ within an R session.
 
 ## Installing gitwords
-The easiest way to install gitwords is to use the `install_github()` function in the devtools package to install it directly from this github repository.
 
-If you do not have devtools installed already, then open up an R session and run:
+### Step 1:
+
+To install gitwords, you will first need to ‘clone’ (i.e. download) this repository to your local computer with git. Do this by opening up the command line terminal and run:
 ```
-> install.packages("devtools")
+$ git clone https://github.com/tcspears/gitwords gitwords
 ```
-Once devotees has been installed, load it into R:
+which will create a new directory on your computer called “gitwords” that contains all of the relevant code.
+
+Next, run `pwd` (short for ‘print working directory’) at the command line and make a note of what it is reported. For instance, on my computer I get the following:
 ```
-> library("devtools")
+$ pwd
+/Users/taylor
+``` 
+You will need this bit of information later in step 3.
+
+### Step 2:
+Next, you will need to see if git is installed to the same location that gitwords will expect it to be. Try running the following at the command line:
 ```
-Finally, to install the gitwords package, run the following in R:
+$ /usr/bin/git
 ```
-> install_github('gitwords','tcspears')
+If you get a message like:
 ```
-You should then be able to load it into memory using:
+usage: git [--version] [--help] [-C <path>] [-c name=value]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p|--paginate|--no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           <command> [<args>]
+
 ```
-> library("gitwords")
+then git is located in the right place and you can move on to step 3.
+
+If instead you get an error message like:
 ```
+-bash: /usr/bin/git: No such file or directory
+```
+then you will need to do some detective work to determine where git is installed. Once you have located it, open up the file called “parameters.R” within the R sub-directory of the newly created ‘gitwords’ directory, and change the value of `git.location` to correspond to the location of git on your computer.
+
+### Step 3:
+Open up R, and set your working directory to the directory that you made a note of in step 1, which corresponds to the directory on your computer that contains the “gitwords” repository. Do this by using the `setwd()` function. In my case, this would be:
+```
+setwd(“/Users/taylor”)
+```
+Next, install gitwords into R:
+```
+install(“gitwords”)
+```
+After it has installed, you can then load the gitwords package using `library(gitwords)`.
 
 ### Installation of the shell scripts
-I have also included three shell scripts to allow you to access  these functions from the terminal. To use these, you will need to follow the following steps.
+I have also included three shell scripts to allow you to access  these functions from the terminal. (I prefer to do this, as it is inconvenient to have R running constantly.) To use these, you will need to follow the following steps.
 
 #### Step 1:
-First, download the three scripts -- `get_words`,`word_stats`, and `plot_words` from the [scripts directory](https://github.com/tcspears/gitwords/tree/master/scripts).
+First, grab the three scripts -- `get_words`,`word_stats`, and `plot_words` from the ‘scripts’ subdirectory of the gitwords repository you downloaded to your computer. 
 
 Next, we need to determine whether Rscript is installed in the standard location. Open up a terminal/shell and run:
 ```
@@ -113,7 +141,7 @@ If you get an error message like:
 ```
 -bash: /usr/bin/Rscript: No such file or directory 
 ```
-then you will need to do some detective work to determine where this program is located, and then edit the first line of each of the three scripts with this correct location. If instead of an error message you get a message that begins with the following, 
+then, like before, you will need to do some detective work to determine where this program is located, and then edit the first line of each of the three scripts with this correct location. If instead of an error message you get a message that begins with the following, 
 ```
 Usage: /path/to/Rscript [--options] [-e expr [-e expr2 ...] | file] [args]
 ```
@@ -121,7 +149,7 @@ then you are good to go, and can move on to the next step.
 
 #### Step 2:
 
-Next, you will need to make these files executable. Open up the terminal (in Mac OS X and Linux), navigate to the directory where these files are located, and type in the following
+Next, you will need to make these files executable. Open up the command line terminal, navigate to the directory where these files are located, and type in the following
 ```
 $ chmod +x get_words
 $ chmod +x word_stats
@@ -139,5 +167,6 @@ $ sudo cp plot_words /usr/local/bin/plot_words
 ```
 Unless you are running as root, you will need to supply the password to your user account to authorise these commands. But unless the commands have trouble executing, then the terminal will not return any output.
 
+Now the shell scripts should be ready for you to use! You can also now safely delete the ‘gitwords’ repository you downloaded in step 1.
 
 
