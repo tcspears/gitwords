@@ -2,9 +2,9 @@
 Tools for tracking word counts of commits made to git repositories
 
 ## Description
-gitwords provides a series of functions for counting, summarising, and plotting the number of words committed to a git repository over time. It is intended to be used by writers — PhD students, academics, etc. — who use git as a version control system for their writing projects. 
+gitwords provides a series of functions for counting, summarising, and plotting the number of words committed to a git repository over time. It is intended to be used by writers — PhD students, academics, etc. — who use git as a version control system for their writing projects. Like git, it can be used with any writing workflow that involves the production of documents in plain text format (LaTeX, Scrivener, Markdown, etc.).
 
-As a PhD student, I found git to be an indispensable tool for keeping track of various versions of my thesis chapters. But I was disappointed by the lack of available tools within git for tracking my writing progress on a day-to-day basis. Indeed, git was designed for software developers rather than writers. While git includes some functionality to track the number of lines of code committed to a repository, ‘lines of code’ is a fairly useless measure of productivity for writers. Word counts certainly aren’t perfect (and can be easily gamed), but at least they help you get a sense of your writing productivity over time.
+As a PhD student, I found git to be an indispensable tool for keeping track of various versions of my thesis chapters. But I was disappointed by the lack of available tools within git for tracking my writing progress on a day-to-day basis. Indeed, git was designed for software developers rather than writers. While git includes some functionality to track the number of lines of code committed to a repository, ‘lines of code’ is a fairly useless measure of productivity for writers. 
 
 gitwords includes three main functions that can help you keep track of your writing progress:
 * `get_words()`: calculates word counts of commits made to a git repository for a date or a range of dates.
@@ -24,7 +24,7 @@ and committed this document to a git repository. Today, you change the document 
 ```
 The slow red fox jumped over the lazy cat.
 ``` 
-Running git-diff on these two commits will produce a text document that looks like this:
+By running git-diff on these two commits, one can produce a text document that looks like this:
 ```
 The
 - quick brown
@@ -33,7 +33,7 @@ fox jumped over the lazy
 - dog.
 + cat. 
 ```
-The idea behind gitwords is that we can calculate the number of new words and deleted words in a document between any two commits by counting up the number of words on the lines beginning with ‘+’ and ‘-‘, respectively. For instance, in the above case, the number of new words would be 3, and the number of deleted words would also be 3. What gitwords does is sums up these three word counts for all of the commits made on each day in the git repository in order to calculate daily word counts.
+The idea behind gitwords is that we can calculate the number of new words and deleted words in a document between any two commits by counting up the number of words on all of the lines beginning with ‘+’ and ‘-‘, respectively. For instance, in the above case, the number of new words would be 3, and the number of deleted words would also be 3. What gitwords does is sums up these three word counts for all of the commits made on each day in the git repository in order to calculate daily word counts.
 
 gitwords is focussed on measuring two productivity metrics that are relevant to writers. The first is ‘net additions’, which roughly captures how much your writing project ‘grew’ in a particular day. It is defined as the difference between the number of new words and deleted words on a particular day:
 
@@ -73,6 +73,7 @@ $ get_words “2015-01-01” “2015-02-02” “~/Dropbox/Repositories/Thesis�
 ```
 
 ## Requirements
+* A writing workflow that involves the production of plain text documents. LaTeX will definitely work, but so will more popular tools such as Scrivener (see [here](http://kpower.me/2013/08/26/scrivener-with-git.html))
 * git. See [here](http://git-scm.com/downloads) for more information.
 * A working R installation. See [here](http://www.r-project.org/). 
 * Within R, you will also need to install the ‘ggplot2’ package, which can be obtained by running `install.packages(“ggplot2”)’ within an R session.
