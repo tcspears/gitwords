@@ -76,6 +76,7 @@ $ get_words “2015-01-01” “2015-02-02” “~/Dropbox/Repositories/Thesis�
 * git. See [here](http://git-scm.com/downloads) for more information.
 * A working R installation. See [here](http://www.r-project.org/). 
 * Within R, you will also need to install the ‘ggplot2’ package, which can be obtained by running `install.packages(“ggplot2”)’ within an R session.
+* At the moment, gitwords only runs ‘out of the box’ on Mac OS X, Linux, or some variety of Unix. I expect that it is possible to make it work on Windows with only a small number of changes, but I don’t have a Windows machine so I haven’t done this yet.
 
 ## Installing gitwords
 
