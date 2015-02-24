@@ -27,6 +27,10 @@ word_stats <- function(date=NULL,repo=getwd(),netOnly=TRUE){
   c <- add_word_counts_table(b,repo)
   d <- collapse_date(c)
   
+  # Calculates weekly 
+  
+  weekly <- weekly_stats(d)
+  
   # Drops new and deleted words if netOnly is set to true
   if(netOnly==TRUE){
     d <- d[,-(2:3)]
@@ -37,5 +41,10 @@ word_stats <- function(date=NULL,repo=getwd(),netOnly=TRUE){
   StDev <- sapply(d[,-1], sd, na.rm=TRUE) 
   Min <- sapply(d[,-1], min, na.rm=TRUE) 
   Max <- sapply(d[,-1], max, na.rm=TRUE) 
-  return(rbind(Mean,Median,StDev,Min,Max))
+  summary <- rbind(Mean,Median,StDev,Min,Max)
+
+  output <- list(summary,weekly)
+  names(output) <- c("Summary Statistics","Weekly Statistics")
+  
+  return(output)
 }
