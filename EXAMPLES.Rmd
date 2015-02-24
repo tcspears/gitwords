@@ -20,14 +20,6 @@ plot_words(date="2013-07-01",
            repo="~/Dropbox/Repositories/Thesis")
 ```
 
-plot_words allows you to choose which word count (i.e. new words, deleted words, net additions) to plot. By default, net additions are plotted, but this can be changed with the metric parameter:
-
-```{r15}
-plot_words(date="2013-07-01",
-           metric="new",
-           repo="~/Dropbox/Repositories/Thesis")
-```
-  
 You can also supply a range of dates to the functions, in which case all commits between those two dates are used:
   
 ```{r2}
