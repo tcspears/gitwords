@@ -36,15 +36,15 @@ word_stats <- function(date=NULL,repo=getwd(),netOnly=TRUE){
     d <- d[,-(2:3)]
   }
   
-  Mean <- sapply(d[,-1], mean, na.rm=TRUE) 
-  Median <- sapply(d[,-1], median, na.rm=TRUE) 
-  StDev <- sapply(d[,-1], sd, na.rm=TRUE) 
-  Min <- sapply(d[,-1], min, na.rm=TRUE) 
-  Max <- sapply(d[,-1], max, na.rm=TRUE) 
+  Mean <- round(sapply(d[,-1], mean, na.rm=TRUE),0)
+  Median <- round(sapply(d[,-1], median, na.rm=TRUE),0)
+  StDev <- round(sapply(d[,-1], sd, na.rm=TRUE),0)
+  Min <- round(sapply(d[,-1], min, na.rm=TRUE),0)
+  Max <- round(sapply(d[,-1], max, na.rm=TRUE),0)
   summary <- rbind(Mean,Median,StDev,Min,Max)
 
   output <- list(summary,weekly)
-  names(output) <- c("Summary Statistics","Weekly Statistics")
+  names(output) <- c("Summary Statistics","Median by Day")
   
   return(output)
 }
