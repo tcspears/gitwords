@@ -7,16 +7,28 @@
 #' @return A character vector of results.
 
 grep_repo <- function(expression,repo=getwd()){
+  # Set working directory to repo and store current working directory location
+  # Note: This is really a horrible practice because it entails modifying a 
+  # global environmental variable, but I can't figure out a way to pass a 
+  # specific location to git grep.
+  
+  old.location <- getwd()
+  setwd(repo)
+  
   # Grep entire repo for expression and then save output to 'a'
   a <- system(paste(git.location," grep ","\'",expression,"\' ","$(git rev-list --all)",sep=""),intern=TRUE)
   
   # Cut the git commit ID from output to enable comparison of duplicates
-  b <- substr(a,42,nchar(a))
+  # Do this by subbing out everything before first colon (which corresponds to 
+  # the commit id).
+  b <- sub("^(.*?):","",a)
   
   # Identify and drop duplicates
   dup <- duplicated(b)
-  c <- b[!dup]
+  out <- b[!dup]
+  attributes(out)$repo <- repo
   
-  # Return output
-  return(c)
+  # Reset working directory to old.location and return output
+  setwd(old.location)
+  return(out)
 }
