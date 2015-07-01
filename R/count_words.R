@@ -14,7 +14,7 @@ count_words <- function(commit_old,commit_new,repo){
   
   # This runs git diff in porcelain mode, and then saves the output as a
   # character vector 'a'.
-  a <- system(paste(git.location," ",commit_old,"..",commit_new," --word-diff=porcelain",sep=""),intern=TRUE)
+  a <- system(paste(git.location," diff ",commit_old,"..",commit_new," --word-diff=porcelain",sep=""),intern=TRUE)
   
   # Next we loop through each element of a. If the element begins with "+",
   # then we count the number of words in that line and that number to new_words.
