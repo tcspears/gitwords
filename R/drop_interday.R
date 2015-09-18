@@ -4,6 +4,7 @@
 #' @return Data.frame of commits with interday entries removed.
 
 drop_interday <- function(commit.table){
+  commit.table <- commit.table[complete.cases(commit.table),]
   commit.table$index <- 0
   for(i in seq(1,length(unique(as.Date(commit.table$Date))))){
     commit.table[as.Date(commit.table$Date)==unique(as.Date(commit.table$Date))[i],]$index <- seq(1,length(commit.table[as.Date(commit.table$Date)==unique(as.Date(commit.table$Date))[i],1]))
