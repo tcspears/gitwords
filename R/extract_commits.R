@@ -6,6 +6,13 @@
 #' extract_commits(repo="~/repositories/project/")
 
 extract_commits <- function(repo){
+
+  # Set working directory to repo and store current working directory location
+  # Note: This is really a horrible practice because it entails modifying a 
+  # global environmental variable, but I can't figure out a way to pass a 
+  # specific location to git grep.
+  
+  old.location <- getwd()
   setwd(repo)
   
   # Calls git log using the shell and assigns the output to a character vector
@@ -30,8 +37,9 @@ extract_commits <- function(repo){
   colnames(table) <- c("Commit","Date")
   
   # Formats the date string as a POSIXct variable
-  table[,2] <- as.POSIXct(substr(table[,2],1,24),format="%a %b %d %H:%M:%S %Y")
+  table[,2] <- as.POSIXct(substr(table[,2],1,nchar(table[,2])),format="%a %b %d %H:%M:%S %Y %z")
   
-  # Returns the modified table.
+  # Reset working directory to old.location and return the modified table
+  setwd(old.location)
   return(table)
 }
