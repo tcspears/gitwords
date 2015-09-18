@@ -2,7 +2,12 @@ Package: gitwords
 Title: Tools for tracking word counts of commits made to git repositories.
 Version: 0.1
 Authors@R: person("Taylor", "Spears", email="tcs@tcspears.net", role = c("aut", "cre"))
+Author: Taylor Spears [aut, cre]
+Maintainer: Taylor Spears <tcs@tcspears.net>
 Description: Calculates summary statistics and builds plots of word counts for commits made to a git repository.
-Depends: R (>= 3.1.2), ggplot2
+Depends: R (>= 3.1.2)
 License: MIT - see LICENSE
 LazyData: true
+Imports: ggplot2
+URL: https://github.com/tcspears/gitwords
+
