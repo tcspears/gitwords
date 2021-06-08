@@ -12,10 +12,10 @@
 
 collapse_date <- function(commit.table,range=c(-4000,10000)){
   # Collapses each of the individual columns by date, resulting in 3 matrices.
-  new.words <- tapply(commit.table[,3],as.Date(commit.table$Date),sum)
-  del.words <- tapply(commit.table[,4],as.Date(commit.table$Date),sum)
-  net.words <- tapply(commit.table[,5],as.Date(commit.table$Date),sum)
-  net.mods <- tapply(commit.table[,6],as.Date(commit.table$Date),sum)
+  new.words <- tapply(commit.table[,3],as.Date(commit.table$Date),sum, na.rm = TRUE)
+  del.words <- tapply(commit.table[,4],as.Date(commit.table$Date),sum, na.rm = TRUE)
+  net.words <- tapply(commit.table[,5],as.Date(commit.table$Date),sum, na.rm = TRUE)
+  net.mods <- tapply(commit.table[,6],as.Date(commit.table$Date),sum, na.rm = TRUE)
   
   # Binds the resulting tapply'd columns into a new matrix. Also binds the
   # rownames (dates) into the matrix so these can be used later. Finally,
