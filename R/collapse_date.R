@@ -38,8 +38,13 @@ collapse_date <- function(commit.table,range=c(-4000,10000)){
   words.table <- words.table[words.table[,4] > range[1] & words.table[,4] < range[2],]
   
   # Deletes the top entry, which has NA values.
-  words.table <- words.table[-1,]
-  
+
+  first_row_has_nas <- any(is.na(words.table[-1, ]))
+
+  if(first_row_has_nas){
+      words.table <- words.table[-1,]
+  }
+
   # Returns the modified table.
   return(words.table)
 }
